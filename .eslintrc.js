@@ -4,6 +4,7 @@ module.exports = {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
     sourceType: 'module',
+    ecmaVersion: 2021, // Add this line
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
@@ -21,5 +22,12 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'BinaryExpression[operator="||="]', // Allow ||= operator
+        message: 'Use of ||= operator is allowed.',
+      },
+    ],
   },
 };
