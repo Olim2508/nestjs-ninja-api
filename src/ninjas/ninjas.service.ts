@@ -4,10 +4,10 @@ import { UpdateNinjaDto } from './dto/update-ninja.dto';
 
 @Injectable()
 export class NinjasService {
-  private ninjas: ({ new(): RemoveFieldsWithType<Partial<CreateNinjaDto>, Function>; new(...args: any[]): RemoveFieldsWithType<Partial<CreateNinjaDto>, Function>; call(this: Function, thisArg: any, ...argArray: any[]): any; weapon: "sword" | "gun"; caller: Function; bind(this: Function, thisArg: any, ...argArray: any[]): any; apply(this: Function, thisArg: any, argArray?: any): any; readonly name: string; readonly length: number; [Symbol.hasInstance](value: any): boolean; toString(): string; arguments: any; id: number; prototype: any } | { weapon: string; name: string; id: number } | { weapon: string; name: string; id: number })[] = [
-    { id: 0, name: 'olim', weapon: 'sword' },
-    { id: 1, name: 'mario', weapon: 'gun' },
-  ];
+  private ninjas = [
+      { id: 0, name: 'olim', weapon: 'sword' },
+      { id: 1, name: 'mario', weapon: 'gun' },
+  ]
 
   getNinjas(weapon?: 'sword' | 'gun') {
     if (weapon) {
