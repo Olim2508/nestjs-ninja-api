@@ -1,35 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { UpdateNinjaDto } from './dto/update-ninja.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Ninja, WeaponType} from "./ninjas.entity";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class NinjasService {
+  constructor(
+    @InjectRepository(Ninja)
+    private ninjasRepository: Repository<Ninja>,
+  ) {}
+
   private ninjas = [
       { id: 0, name: 'olim', weapon: 'sword' },
       { id: 1, name: 'mario', weapon: 'gun' },
   ]
 
-  getNinjas(weapon?: 'sword' | 'gun') {
-    if (weapon) {
-      return this.ninjas.filter((ninja) => ninja.weapon === weapon);
-    }
-    return this.ninjas;
+  async getNinjas(): Promise<Ninja[]> {
+    return await this.ninjasRepository.find();
   }
 
-  getNinja(id: number) {
-    const ninja = this.ninjas.find((ninja) => ninja.id == id);
+  async getNinja(id: number) {
+    const ninja = await this.ninjasRepository.findOne({
+      where: {
+            id: id,
+        },
+    })
     if (!ninja) {
       throw new Error('Ninja not found');
     }
     return ninja;
   }
 
-  createNinja(createNinjaDto: CreateNinjaDto) {
-    const newNinja = {
-      ...createNinjaDto,
-      id: Date.now(),
-    };
-    this.ninjas.push(newNinja);
+  async createNinja(createNinjaDto: CreateNinjaDto) {
+    const ninja = this.ninjasRepository.create(createNinjaDto);
+    return await this.ninjasRepository.save(ninja);
   }
 
   updateNinja(id: number, updateNinjaDto: UpdateNinjaDto) {
