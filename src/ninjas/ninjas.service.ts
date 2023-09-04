@@ -21,7 +21,7 @@ export class NinjasService {
     return await this.ninjasRepository.find();
   }
 
-  async getNinja(id: number) {
+  async getNinja(id: number): Promise<Ninja> {
     const ninja = await this.ninjasRepository.findOne({
       where: {
             id: id,
@@ -33,19 +33,15 @@ export class NinjasService {
     return ninja;
   }
 
-  async createNinja(createNinjaDto: CreateNinjaDto) {
+  async createNinja(createNinjaDto: CreateNinjaDto): Promise<Ninja> {
     const ninja = this.ninjasRepository.create(createNinjaDto);
     return await this.ninjasRepository.save(ninja);
   }
 
-  updateNinja(id: number, updateNinjaDto: UpdateNinjaDto) {
-    this.ninjas = this.ninjas.map((ninja) => {
-      if (ninja.id == id) {
-        return { ...ninja, ...updateNinjaDto };
-      }
-      return ninja;
-    });
-    return this.getNinja(id);
+ async updateNinja(id: number, updateNinjaDto: UpdateNinjaDto) {
+    const ninja = await this.getNinja(id)
+    Object.assign(ninja, updateNinjaDto);
+    return await this.ninjasRepository.save(ninja);
   }
 
   async deleteNinja(id: number): Promise<void>  {

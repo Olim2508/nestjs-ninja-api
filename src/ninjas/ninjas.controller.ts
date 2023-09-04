@@ -37,8 +37,13 @@ export class NinjasController {
   }
 
   @Put(':id')
-  updateNinja(@Param('id') id: string, @Body() updateNinjaDto: UpdateNinjaDto) {
-    return this.ninjasService.updateNinja(+id, updateNinjaDto);
+  async updateNinja(@Param('id') id: string, @Body(new ValidationPipe()) updateNinjaDto: UpdateNinjaDto) {
+    try {
+      return await this.ninjasService.updateNinja(+id, updateNinjaDto);
+    } catch (err) {
+      console.log(err)
+      throw new NotFoundException()
+    }
   }
 
   @Delete(':id')
