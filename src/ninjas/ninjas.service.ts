@@ -48,9 +48,7 @@ export class NinjasService {
     return this.getNinja(id);
   }
 
-  deleteNinja(id: number) {
-    const toBeRemoved = this.getNinja(id);
-    this.ninjas = this.ninjas.filter((ninja) => ninja.id != id);
-    return toBeRemoved;
+  async deleteNinja(id: number): Promise<void>  {
+    await this.ninjasRepository.delete(id)
   }
 }

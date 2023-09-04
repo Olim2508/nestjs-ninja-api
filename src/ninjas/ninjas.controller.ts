@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get, NotFoundException,
+  Get, HttpCode, NotFoundException,
   Param, ParseIntPipe,
   Post,
   Put,
@@ -42,7 +42,12 @@ export class NinjasController {
   }
 
   @Delete(':id')
-  deleteNinja(@Param('id') id: string) {
-    return this.ninjasService.deleteNinja(Number(id));
+  @HttpCode(204)
+  async deleteNinja(@Param('id') id: string) {
+    try {
+      await this.ninjasService.deleteNinja(+id);
+    } catch (err) {
+      throw new NotFoundException()
+    }
   }
 }
