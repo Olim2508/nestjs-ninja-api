@@ -5,7 +5,7 @@ enum Weapon {
   Sword = 'sword',
 }
 
-export class CreateNinjaDto {
+export class BaseNinjaDto {
 
   @MinLength(3)
   name: string;
@@ -13,3 +13,5 @@ export class CreateNinjaDto {
   @IsEnum(Weapon, {message: "use correct weapon"})
   weapon: Weapon
 }
+
+export class CreateNinjaDto extends BaseNinjaDto {}
