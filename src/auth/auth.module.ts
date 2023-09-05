@@ -6,8 +6,6 @@ import {UsersModule} from "../users/users.module";
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {PassportModule} from "@nestjs/passport";
 
-console.log("process.env.JWT_SECRET", process.env.JWT_SECRET)
-
 @Module({
   imports: [
     UsersModule,
