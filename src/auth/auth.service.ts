@@ -5,6 +5,7 @@ import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import {User} from "../users/entities/user.entity";
 import {SignInDto} from "./dto/sign-in.dto";
+import {IUser} from "./interface/auth.service.interface";
 
 @Injectable()
 export class AuthService {
@@ -41,7 +42,7 @@ export class AuthService {
         return {access_token: accessToken};
     }
 
-    async validateUser(username: string, password: string): Promise<any> {
+    async validateUser(username: string, password: string): Promise<IUser | null> {
         const user = await this.usersService.findByUsername(username);
         if (user && (await user.validatePassword(password))) {
             const {password, ...result} = user;
