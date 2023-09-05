@@ -1,0 +1,9 @@
+import {IsString} from "class-validator";
+
+export class SignInDto {
+  @IsString({message: "Must be string"})
+  username: string;
+
+  @IsString({message: "Must be string"})
+  password: string;
+}
