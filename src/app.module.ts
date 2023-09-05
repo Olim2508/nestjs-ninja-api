@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { NinjasModule } from './ninjas/ninjas.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import {DataSource} from "typeorm";
 
 
 // const TypeORMConf = require("../ormconfig")
@@ -27,8 +30,13 @@ import { ConfigModule } from '@nestjs/config';
         }),
       // TypeOrmModule.forRoot(TypeORMConf),
       NinjasModule,
+      AuthModule,
+      UsersModule,
   ],
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}
+
