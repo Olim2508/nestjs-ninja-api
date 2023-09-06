@@ -3,6 +3,7 @@
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
@@ -45,6 +46,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Redis is used for saving refresh tokens. Make sure redis is installed on your pc and run redis server
+
+Command for starting redis:
+
+```bash
+$ redis-server
+```
+
 ## Test
 
 ```bash
@@ -58,24 +67,34 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Generate a resource that creates module, controller, service and other components
+
+```
+nest generate resource <module_name>
+```
+
 ## Generate a module command
+
 ```
 nest generate module <module_name>
 ```
 
 ## Generate a controller command
+
 ```
 nest generate controller <module_name>
 ```
 
 ## Generate service command
+
 ```
 nest generate service <module_name>
 ```
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
+you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 

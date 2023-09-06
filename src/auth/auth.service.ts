@@ -6,7 +6,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {User} from "../users/entities/user.entity";
 import {SignInDto} from "./dto/sign-in.dto";
 import {IUser} from "./interface/auth.service.interface";
-import {RefreshTokenIdsStorage} from "./refresh-token-ids-storage";
+import {RefreshTokenIdsStorage} from "./utils/refresh-token-ids-storage";
 import {JwtRefreshTokenStrategy} from "./strategy/jwt-refresh-token.strategy";
 
 @Injectable()
@@ -43,7 +43,7 @@ export class AuthService {
 
         // Store the refresh token in redis
         // todo need to create redis server to store refresh token
-        // await this.refreshTokenIdsStorage.insert(user.id, refreshToken);
+        await this.refreshTokenIdsStorage.insert(user.id, refreshToken);
 
         return {
             access_token: accessToken,

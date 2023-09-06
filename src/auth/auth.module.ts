@@ -5,7 +5,7 @@ import {UsersService} from "../users/users.service";
 import {UsersModule} from "../users/users.module";
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {PassportModule} from "@nestjs/passport";
-import {RefreshTokenIdsStorage} from "./refresh-token-ids-storage";
+import {RefreshTokenIdsStorage} from "./utils/refresh-token-ids-storage";
 import {LocalStrategy} from "./strategy/local.strategy";
 import {JwtRefreshTokenStrategy} from "./strategy/jwt-refresh-token.strategy";
 
