@@ -10,13 +10,17 @@ export class RefreshTokenIdsStorage
     implements OnApplicationBootstrap, OnApplicationShutdown {
     private redisClient: Redis;
 
+
     constructor(private configService: ConfigService) {
     }
 
     onApplicationBootstrap() {
+        // console.log("process.env.REDIS_PORT", process.env.REDIS_PORT)
         this.redisClient = new Redis({
-            host: this.configService.get('REDIS_HOST'),
-            port: this.configService.get('REDIS_PORT'),
+            // host: this.configService.get('REDIS_HOST'),
+            // port: this.configService.get('REDIS_PORT'),
+            host: "localhost",
+            port: 6379,
         });
     }
 

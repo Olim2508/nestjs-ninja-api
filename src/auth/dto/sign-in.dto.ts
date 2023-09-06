@@ -1,9 +1,12 @@
 import {IsString} from "class-validator";
+import {ApiProperty} from "@nestjs/swagger";
 
 export class SignInDto {
-  @IsString({message: "Must be string"})
-  username: string;
+    @ApiProperty()
+    @IsString({message: "Must be string"})
+    username: string;
 
-  @IsString({message: "Must be string"})
-  password: string;
+    @ApiProperty()
+    @IsString({message: "Must be string"})
+    password: string;
 }
